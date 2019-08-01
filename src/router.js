@@ -9,6 +9,10 @@ import search from './components/SearchContainer.vue'
 let router = new VueRouter({
     routes : [
         {
+            path:"/",
+            redirect:'/home'
+        },
+        {
             path:'/home',
             component:home
             

@@ -1,9 +1,16 @@
 <template>
-  <div>
+  <div class="app-container">
      <!-- <br></br> -->
+	<!-- 头部 -->
+    <mt-header fixed title="黑马"></mt-header>
+	<!-- 路由容器 -->
+	<div id="routerCollction"> 
+		<transition>
+			<router-view></router-view>
+		</transition>
+	</div>
+	
 
-    <mt-header fixed title="俊爷的第一个项目"></mt-header>
-	<router-view></router-view>
     <nav class="mui-bar mui-bar-tab">
 			<router-link class="mui-tab-item " to="/home">
 				<span class="mui-icon mui-icon-home"></span>
@@ -29,8 +36,27 @@
 </script>
 
 <style scoped>
-div{
+/* 路由切换动画，给设置position fixed */
+#routerCollction{
+	position: fixed;
+	width: 100% ;
+	
+}
+.app-container{
    padding-top:40px; 
+   overflow-x: hidden;
+}
+.v-enter{
+	opacity: 0;
+	transform: translateX(100%);
+}
+.v-leave-to{
+	opacity: 0;
+	transform: translateX(-100%);
+	position:absolute;
+}
+.v-enter-active, .v-leave-active {
+  transition: all .5s ease;
 }
 </style>
 

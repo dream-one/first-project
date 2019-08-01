@@ -22,6 +22,10 @@ module.exports = {
             loader: "style-loader!css-loader!less-loader",
         },
         {
+            test: /\.(png|jpg)$/,
+　　　　　　 loader: 'url-loader?limit=8192'
+        },
+        {
             test:/\.sass$/,
         use:['vue-style-loader', 'css-loader', 'sass-loader']
         },
