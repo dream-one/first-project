@@ -4,7 +4,8 @@ import home from './components/HomeContainer.vue'
 import Member from './components/MemberContainer.vue'
 import ShopCar from './components/ShopCarContainer.vue'
 import search from './components/SearchContainer.vue'
-
+import newslist from './components/Newslist.vue'
+import newscon from './components//NewsContainer.vue'
 //定义路由嵌套
 let router = new VueRouter({
     routes : [
@@ -28,6 +29,14 @@ let router = new VueRouter({
         {
             path:'/search',
             component:search
+        },
+        {
+            path:'/home/newslink',
+            component:newslist
+        },
+        {
+            path:'/home/newslist/:id',//id 是动态的 需加冒号
+            component:newscon
         }
 ],
 linkActiveClass:"mui-active"
