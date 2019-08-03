@@ -11,7 +11,7 @@
     <div class='content' v-html="news.content">
 
     </div>
-    <commentBox></commentBox>
+    <commentBox :id="this.id"></commentBox>
   </div>
 </template>
 
