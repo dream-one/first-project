@@ -11,6 +11,9 @@ import router from './router.js'
 import moment from 'moment' //导入时间格式化插件
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
+import VuePreview from 'vue-preview';
+
+Vue.use(VuePreview);
 Vue.use(MintUI)
 Vue.use(VueRouter)
 Vue.use(VueResource)

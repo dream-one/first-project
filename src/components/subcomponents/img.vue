@@ -1,5 +1,5 @@
 <template>
-<!-- 图片详情页 -->
+  <!-- 图片LEIBIAN 详情页 -->
   <div>
     <!-- 顶部选项卡 -->
     <div id="slider" class="mui-slider">
@@ -8,25 +8,27 @@
         class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted"
       >
         <div class="mui-scroll">
-			<!-- 设置：class 只有id为0的时候才高亮 即一进页面就是第一个高亮-->
-          <a @click='getimg(item.id)' :class="['mui-control-item',item.id == 0 ? ' mui-active' : '']" href="#item1mobile" v-for="item in imgscategory" :key='item.id'>
-			  {{item.title}}
-		  </a>
+          <!-- 设置：class 只有id为0的时候才高亮 即一进页面就是第一个高亮-->
+          <a
+            @click="getimg(item.id)"
+            :class="['mui-control-item',item.id == 0 ? ' mui-active' : '']"
+            href="#item1mobile"
+            v-for="item in imgscategory"
+            :key="item.id"
+          >{{item.title}}</a>
         </div>
       </div>
     </div>
     <!-- 图片 -->
     <ul class="photo-list">
-  <router-link tag="li" :to="'/home/imglist/'+item.id" v-for="item in imgdata" :key='item.id'>
-    <img v-lazy="item.img_url">
-    <div class="info">
-      <h1 class="info-title">{{item.title}}</h1>
-      <div class="info-body">{{item.zhaiyao}}</div>
-    </div>
-  </router-link >
-</ul>
-
-
+      <router-link tag="li" :to="'/home/imglist/'+item.id" v-for="item in imgdata" :key="item.id">
+        <img v-lazy="item.img_url" />
+        <div class="info">
+          <h1 class="info-title">{{item.title}}</h1>
+          <div class="info-body">{{item.zhaiyao}}</div>
+        </div>
+      </router-link>
+    </ul>
   </div>
 </template>
 
@@ -36,8 +38,8 @@ import mui from "../../lib/mui-master/dist/js/mui";
 export default {
   data() {
     return {
-      imgscategory: [],//存储标题数据
-      imgdata:[] //存储图片数据
+      imgscategory: [], //存储标题数据
+      imgdata: [] //存储图片数据
     };
   },
   created() {
@@ -51,7 +53,7 @@ export default {
     });
   },
   methods: {
-  	// 获取顶部选项卡数据
+    // 获取顶部选项卡数据
     get() {
       this.$http.get("api/getimgcategory").then(res => {
         this.imgscategory = res.body.message;
@@ -60,53 +62,57 @@ export default {
       });
     },
     // 获取图片
-    getimg(imgid){
-      this.$http.get('api/getimages/'+imgid).then(
-        res => {this.imgdata = res.body.message}
-      )
+    getimg(imgid) {
+      this.$http.get("api/getimages/" + imgid).then(res => {
+        this.imgdata = res.body.message;
+      });
     }
   }
 };
 </script>
 
-<style>
-.photo-list img[lazy=loading] {
+<style scoped>
+.photo-list img[lazy="loading"] {
   width: 40px;
   height: 300px;
   margin: auto;
 }
-.photo-list{
+.photo-list {
   list-style: none;
   margin: 0;
   padding: 10px;
   padding-bottom: 0;
 }
-.photo-list img{
+.photo-list img {
   width: 100%;
   vertical-align: middle;
 }
-.photo-list li{
+.photo-list li {
   background-color: #ccc;
   text-align: center;
   margin-bottom: 10px;
   box-shadow: 0 0 6px #999;
-   position: relative;
+  position: relative;
 }
-.info{
+.info {
   color: white;
-  background-color:rgba(0, 0, 0, 0.3) ;
-  position:absolute ;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
   bottom: 0;
   max-height: 84px;
 }
-.info-title{
+.info-title {
   font-size: 14px;
   text-align: left;
 }
-.info-body{
-   font-size: 10px;
-   text-align: left;
-
+.info-body {
+  font-size: 10px;
+  text-align: left;
+}
+img {
+  width: 100%;
+  box-shadow: 0 0 8px #999;
+  border-radius: 5px;
 }
 
 </style>
