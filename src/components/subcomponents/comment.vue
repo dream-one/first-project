@@ -1,10 +1,10 @@
 <template>
   <div>
-      <!-- 评论头 -->
+    <!-- 评论头 -->
     <h1>发表评论</h1>
     <hr />
-    <textarea placeholder="在这里发表你的见解"></textarea>
-    <mt-button size="large" type="primary">提交</mt-button>
+    <textarea placeholder="在这里发表你的见解" v-model="msg"></textarea>
+    <mt-button size="large" type="primary" @click="tijiao()">提交</mt-button>
     <!-- 评论区 -->
     <div class="comlist">
       <div class="comcon" v-for="(item,index) in comments" :key="index">
@@ -18,11 +18,13 @@
 </template>
 
 <script>
+import { Toast } from 'mint-ui';
 export default {
   data() {
     return {
       pageindex: 1, //评论页数，点击查看更多时应该+1
-      comments: [] //存放评论数据
+      comments: [], //存放评论数据
+      msg: ""
     };
   },
 
@@ -48,6 +50,34 @@ export default {
             alert("错误");
           }
         });
+    },
+    tijiao() {  //添加评论方法
+      if (this.msg == "") { //判断是否为空
+        Toast("内容不能为空");
+      return;
+      }
+      this.$http  //把评论发送到后台
+        .post(
+          "api/postcomment/" + this.id,
+          {
+            content: this.msg.trim() //第二个参数，要提交的对象数据，API中定义的
+          },
+          {
+            emulateJSON: true //第三个参数，可全局配置 ，定义提交时表单的格式
+          }
+        )
+        .then(
+          res => {
+            let newcomment = {
+              add_time: new Date(),
+              user_name: "阿信",
+              content: this.msg.trim() //trim()去除多余空格
+            };
+            this.comments.unshift(newcomment);
+            this.msg=""
+          },
+          err => Toast("发送错误")
+        );
     }
   }
 };

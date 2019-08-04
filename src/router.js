@@ -6,6 +6,8 @@ import ShopCar from './components/ShopCarContainer.vue'
 import search from './components/SearchContainer.vue'
 import newslist from './components/Newslist.vue'
 import newscon from './components//NewsContainer.vue'
+import img from './components/subcomponents/img.vue'
+import imgphtot from './components/subcomponents/phtotinfo.vue'
 //定义路由嵌套
 let router = new VueRouter({
     routes : [
@@ -37,6 +39,14 @@ let router = new VueRouter({
         {
             path:'/home/newslist/:id',//id 是动态的 需加冒号
             component:newscon
+        },
+        {
+            path:'/home/imglist',
+            component:img
+        },
+        {
+            path:'/home/imglist/:id',
+            component:imgphtot
         }
 ],
 linkActiveClass:"mui-active"
