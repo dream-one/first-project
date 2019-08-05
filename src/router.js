@@ -10,6 +10,7 @@ import img from './components/subcomponents/img.vue'
 import imgphtot from './components/subcomponents/phtotinfo.vue'
 import goodslist from './components/goods/goodslist.vue'
 import search1 from './components/subcomponents/search.vue'
+import Goodsinof from './components/goods/goodsinof.vue'
 //定义路由嵌套
 let router = new VueRouter({
     routes: [
@@ -53,6 +54,10 @@ let router = new VueRouter({
         {
             path: '/home/goodslist',
             component: goodslist
+        },
+        {
+            path:'/home/goodslist/goodsinof/:id',
+            component:Goodsinof
         }
     ],
     linkActiveClass: "mui-active"

@@ -1,0 +1,60 @@
+<template>
+  <div>
+    <!-- 轮播图 -->
+    <div class="mui-card">
+      <div class="mui-card-content">
+        <div class="mui-card-content-inner">
+          <!-- <div id="luntu">
+      <mt-swipe :auto="3000">
+        <mt-swipe-item v-for="item in lunboarr" :key="item.u">
+          <img :src="item.img" />
+        </mt-swipe-item>
+      </mt-swipe>
+    </div>
+          -->
+        </div>
+      </div>
+    </div>
+    <!-- 价格 -->
+    <div class="mui-card">
+      <div class="mui-card-header">页眉</div>
+      <div class="mui-card-content">
+        <div class="mui-card-content-inner">包含页眉页脚的卡片，页眉常用来显示面板标题，页脚用来显示额外信息或支持的操作（比如点赞、评论等）</div>
+      </div>
+      <div class="mui-card-footer">页脚</div>
+    </div>
+    <div class="mui-card">
+      <div
+        class="mui-card-header mui-card-media"
+        style="height:40vw;background-image:url(../images/cbd.jpg)"
+      ></div>
+      <div class="mui-card-content">
+        <div class="mui-card-content-inner">
+          <p>Posted on January 18, 2016</p>
+          <p style="color: #333;">这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
+        </div>
+      </div>
+      <!-- 商品参数 -->
+      <div class="mui-card-footer">
+        <a class="mui-card-link">Like</a>
+        <a class="mui-card-link">Read more</a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+    data(){
+        return {}
+    },
+    methods:{
+        get(){
+            this.$http.get()
+        }
+    }
+};
+</script>
+
+<style>
+</style>
