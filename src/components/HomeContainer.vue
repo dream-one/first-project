@@ -79,7 +79,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #luntu {/* 轮播图尺寸 */
   height: 200px;
   width: 100%;
