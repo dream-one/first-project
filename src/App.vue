@@ -2,6 +2,7 @@
   <div class="app-container">
     <!-- <br></br> -->
     <!-- 头部 -->
+    <!-- <goback class="back"></goback> -->
     <mt-header fixed title="张俊的第一个项目"></mt-header>
     <!-- 路由容器 -->
     
@@ -16,12 +17,13 @@
       </router-link>
       <router-link class="mui-tab-item-zj" to="/member">
         <span class="mui-icon mui-icon-contact">
-          <span class="mui-badge">0</span>
+          
         </span>
         <span class="mui-tab-label">会员</span>
       </router-link>
       <router-link class="mui-tab-item-zj" to="/shopcar">
         <span class="mui-icon mui-icon-extra mui-icon-extra-cart"></span>
+        <span class="mui-badge" id="shopcar">0</span>
         <span class="mui-tab-label">购物车</span>
       </router-link>
       <router-link class="mui-tab-item-zj" to="/search">
@@ -33,7 +35,16 @@
 </template>
 
 <script>
+import goback from './components/subcomponents/goback.vue'
 
+export default{
+  data(){
+    return {}
+  },
+  components:{
+    goback
+  }
+}
 </script>
 
 <style scoped>
@@ -94,6 +105,24 @@
 }
 .mui-bar-tab .mui-tab-item-zj.mui-active {
     color: #007aff;
+}
+/* .back{
+  position:fixed ;
+  top:0;
+  z-index: 100;
+  color:#fff;
+} */
+.mui-badge {
+    font-size: 10px;
+    line-height: 1.4;
+    position: absolute;
+    top: -2px;
+    left: 65%;
+    margin-left: -10px;
+    padding: 1px 5px;
+    color: white;
+    background: red;
+    z-index: 80;
 }
 </style>
 
