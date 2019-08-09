@@ -30,7 +30,7 @@
           </p>
           <p>
             购买数量:
-            <goodsnum ref='good' class="goodsnum"></goodsnum>
+            <goodsnum ref="good" class="goodsnum"  :goodsMaxNum="price.stock_quantity"></goodsnum>
           </p>
           <mt-button size="small" type="primary">立即购买</mt-button>
           <mt-button size="small" type="danger" @click="flag =!flag;getgoodsnum()">加入购物车</mt-button>
@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="mui-card-footer">
-        <router-link :to=""/home/goodslist/goodsinof/goodstuwen/"+this.id">
+        <router-link :to="'/home/goodslist/goodsinof/goodstuwen/'+this.id">
           <mt-button class="btn" size="large" type="primary" plain>图文介绍</mt-button>
         </router-link>
       </div>
@@ -61,10 +61,11 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
-      lunbotu: [],//轮播
+      lunbotu: [], //轮播
       price: {},
-      flag:false,//控制小球显示
-      count:1//商品数量
+      flag: false, //控制小球显示
+      count: 1, //商品数量,
+
     };
   },
   created() {
@@ -81,10 +82,12 @@ export default {
         }
       });
     },
-    getgoodsnum(){  //获取子组件商品个数
-        
-       this.count=this.$refs.good.getnumber();  //调用子组件的getnumber方法
-       console.log(this.count)
+
+    getgoodsnum() {
+      //获取子组件商品个数
+
+      this.count = this.$refs.good.getnumber(); //调用子组件的getnumber方法
+
     },
     getPrice() {
       //获取价格
@@ -98,14 +101,16 @@ export default {
     },
     //小球动画
     beforeEnter(el) {
+     
       el.style.transform = "translate(0,0)";
     },
     Enter(el, done) {
       //让小球在不同分辨率上到同一个地方
+      
       let num = this.$refs.ball.getBoundingClientRect();
-      let shopcar = document.getElementById('shopcar').getBoundingClientRect();
-      let x = shopcar.left - num.left
-      let y = shopcar.top - num.top
+      let shopcar = document.getElementById("shopcar").getBoundingClientRect();
+      let x = shopcar.left - num.left;
+      let y = shopcar.top - num.top;
       el.offsetHeight;
       el.style.transform = `translate(${x}px,${y}px)`;
       el.style.transition = "all 1s ease";
