@@ -1,6 +1,6 @@
 <template>
   <div class="shopcar">
-    <div class="mui-card" v-for="item in goodslist" :key="item.id">
+    <div class="mui-card" v-for="(item,i) in goodslist" :key="item.id">
       <div class="mui-card-content">
         <div class="mui-card-content-inner">
           <mt-switch></mt-switch>
@@ -10,7 +10,7 @@
             <p>
               <span>￥{{item.sell_price}}</span>
               <shopcarnumbox :id="item.id" :initcount='$store.getters.getgoodscount[item.id]' ></shopcarnumbox>
-              <a href="#">删除</a>
+              <a href="#" @click='del(item,i)'>删除</a>
             </p>
           </div>
         </div>
@@ -36,7 +36,7 @@ export default {
         this.getgoodsList()
     },
     methods:{
-        getgoodsList(){
+        getgoodsList(){//调用API 需从vuex获取数据渲染
             let shopcarstr = []
             this.$store.state.goodsShopCar.forEach(element => {     //获取所有购物车商品的id
                 shopcarstr.push(element.id)
@@ -47,6 +47,10 @@ export default {
             this.$http.get('api/goods/getshopcarlist/' + shopcarstr.join(',')).then(res => {  //把id拼起来传入API
                 this.goodslist = res.body.message
             })
+        },
+        del(item,i){//删除功能
+         this.goodslist.splice(i,1)
+         this.$store.commit('removegoods',item)
         }
     },
   components: {
@@ -79,7 +83,7 @@ export default {
           margin: 1px 3px;
         }
         a{
-    
+          margin: 0 18px;
         }
       }
     }

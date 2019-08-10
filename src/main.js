@@ -34,7 +34,7 @@ let store = new Vuex.Store({
             goodsShopCar: goodsShopCar   //加入购物车的商品对象
       },
       mutations: {
-            setgoodsShopCar(state, val) {
+            setgoodsShopCar(state, val) { //添加购物车按钮调用该方法
                   let flag = false  //flag表示有没有对应商品，假设没有，执行some方法
                   state.goodsShopCar.some(item => {     //some：对数组每一项运行函数，任一项返回true则返回true
                         if (item.id == val.id) {
@@ -55,6 +55,18 @@ let store = new Vuex.Store({
                         }
                   })
                   localStorage.setItem('goodsShopCar', JSON.stringify(state.goodsShopCar))
+            },
+            removegoods(state,el){
+                  //删除功能  几个点   
+                  // 1. 需删除两次 一次是vuex  一次是渲染的组件内
+                  // 2. 在组件内删除，因为是v-for，可以在删除标签上之间传i(即下标)，不用获取下标  (item.i) in items
+                  // 3. 组件调用这个vuex的方法，传递一个对象，some方法有第二个参数即当前元素的下标
+                  state.goodsShopCar.some((item,i)=> {
+                        if(item.id == el.id){   //some循环遍历元素如果等于传来的元素
+                              state.goodsShopCar.splice(i,1)//根据下标删除
+                        }
+                  })
+                  localStorage.setItem('goodsShopCar', JSON.stringify(state.goodsShopCar))
             }
       },
       getters: {
@@ -72,6 +84,7 @@ let store = new Vuex.Store({
                   })
                   return a
             }
+           
       }
 })
 let vm = new Vue({
