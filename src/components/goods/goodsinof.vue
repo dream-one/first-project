@@ -30,7 +30,7 @@
           </p>
           <p>
             购买数量:
-            <goodsnum ref="good" class="goodsnum"  :goodsMaxNum="price.stock_quantity"></goodsnum>
+            <goodsnum ref="good" class="goodsnum" :goodsMaxNum="price.stock_quantity"></goodsnum>
           </p>
           <mt-button size="small" type="primary">立即购买</mt-button>
           <mt-button size="small" type="danger" @click="flag =!flag;getgoodsnum()">加入购物车</mt-button>
@@ -64,8 +64,7 @@ export default {
       lunbotu: [], //轮播
       price: {},
       flag: false, //控制小球显示
-      count: 1, //商品数量,
-
+      count: 1 //商品数量,
     };
   },
   created() {
@@ -85,9 +84,14 @@ export default {
 
     getgoodsnum() {
       //获取子组件商品个数
-
       this.count = this.$refs.good.getnumber(); //调用子组件的getnumber方法
-
+      let goodsobj = {  //发送到Vuex的对象
+        id: this.id,  //商品ID
+        count: this.count,  //商品个数
+        price: this.price.market_price,  //商品价格
+        selected:true   //商品在购物车内是否被选中，默认选中
+      };
+      this.$store.commit("setgoodsShopCar", goodsobj);
     },
     getPrice() {
       //获取价格
@@ -101,19 +105,18 @@ export default {
     },
     //小球动画
     beforeEnter(el) {
-     
       el.style.transform = "translate(0,0)";
     },
     Enter(el, done) {
       //让小球在不同分辨率上到同一个地方
-      
+
       let num = this.$refs.ball.getBoundingClientRect();
       let shopcar = document.getElementById("shopcar").getBoundingClientRect();
       let x = shopcar.left - num.left;
       let y = shopcar.top - num.top;
       el.offsetHeight;
       el.style.transform = `translate(${x}px,${y}px)`;
-      el.style.transition = "all 1s ease";
+      el.style.transition = "all 0.5s ease";
       done();
     },
     afterEnter(el) {

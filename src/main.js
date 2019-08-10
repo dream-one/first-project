@@ -19,15 +19,64 @@ Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.http.options.root = 'http://www.liulongbin.top:3005'//全局配置根路径
 Vue.use(App)
-
+import Vuex from 'vuex'
+Vue.use(Vuex)
 
 
 //定义全局过滤器
 Vue.filter('dateFormat', function (dataStr, pattern = "YYYY-MM-DD HH:mm:ss") {   //pattern默认值
       return moment(dataStr).format(pattern)
 })
+let goodsShopCar = JSON.parse(localStorage.getItem('goodsShopCar') || '[]')
+//定义vuex 
+let store = new Vuex.Store({
+      state: {
+            goodsShopCar: goodsShopCar   //加入购物车的商品对象
+      },
+      mutations: {
+            setgoodsShopCar(state, val) {
+                  let flag = false  //flag表示有没有对应商品，假设没有，执行some方法
+                  state.goodsShopCar.some(item => {     //some：对数组每一项运行函数，任一项返回true则返回true
+                        if (item.id == val.id) {
+                              item.count += parseInt(val.count)
+                              flag = true
+                              return true //执行完return 可以不用再继续向下执行了
+                        }
+                  })
+                  if (flag === false) {   //如果没有找到，flag就位false  直接push整个对象就好   
+                        state.goodsShopCar.push(val)
+                  }
+                  localStorage.setItem('goodsShopCar', JSON.stringify(state.goodsShopCar))
+            },
+            updatecount(state, el) {    //当numbox值改变时调用，同时更新state
+                  state.goodsShopCar.forEach(item => {
+                        if (item.id == el.id) {
+                              item.count = parseInt(el.count)
+                        }
+                  })
+                  localStorage.setItem('goodsShopCar', JSON.stringify(state.goodsShopCar))
+            }
+      },
+      getters: {
+            getgoods(state) {
+                  let c = 0
+                  state.goodsShopCar.forEach(item => {
+                        c += item.count
+                  })
+                  return c
+            },
+            getgoodscount(state) {  //获取添加到购物车的数量，每当调用这个方法返回一个对象{id:count}
+                  let a = {}
+                  state.goodsShopCar.forEach(item => {
+                        a[item.id] = item.count   //a对象属性名为id,属性值为count
+                  })
+                  return a
+            }
+      }
+})
 let vm = new Vue({
       el: '#app',
       render: c => c(App),
-      router: router
+      router: router,
+      store: store
 })
