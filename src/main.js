@@ -59,7 +59,7 @@ let store = new Vuex.Store({
             removegoods(state,el){
                   //删除功能  几个点   
                   // 1. 需删除两次 一次是vuex  一次是渲染的组件内
-                  // 2. 在组件内删除，因为是v-for，可以在删除标签上之间传i(即下标)，不用获取下标  (item.i) in items
+                  // 2. 在组件内删除，因为是v-for，可以在删除标签上之间传i(即下标)  (item.i) in items
                   // 3. 组件调用这个vuex的方法，传递一个对象，some方法有第二个参数即当前元素的下标
                   state.goodsShopCar.some((item,i)=> {
                         if(item.id == el.id){   //some循环遍历元素如果等于传来的元素
@@ -67,6 +67,15 @@ let store = new Vuex.Store({
                         }
                   })
                   localStorage.setItem('goodsShopCar', JSON.stringify(state.goodsShopCar))
+            },
+            setSelected(state,el){    //设置选择器状态
+                  state.goodsShopCar.some(item => {
+                        if(item.id == el.id){
+                              item.selected = el.selected
+                        }
+                  })
+                  localStorage.setItem('goodsShopCar', JSON.stringify(state.goodsShopCar))
+
             }
       },
       getters: {
@@ -83,6 +92,24 @@ let store = new Vuex.Store({
                         a[item.id] = item.count   //a对象属性名为id,属性值为count
                   })
                   return a
+            },
+            getSelected(state){
+                  let b ={}
+                  state.goodsShopCar.forEach(item => {
+                        b[item.id] = item.selected
+                  })
+                  return b 
+            },
+            getSelectedGoods(state,){
+                  let d = 0
+                  let price= 0
+                  state.goodsShopCar.forEach(item => {
+                        if(item.selected){
+                            d += item.count  
+                             price += item.price*d
+                        }
+                  })
+                  return {jianshu:d,price:price}
             }
            
       }

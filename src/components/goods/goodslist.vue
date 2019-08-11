@@ -58,7 +58,8 @@ export default {
 .goods-list {
 
   display: flex;
-  
+  width:100%;
+  /* height: 500px; */
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 7px;

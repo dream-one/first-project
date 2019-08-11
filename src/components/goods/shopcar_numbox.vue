@@ -22,7 +22,7 @@ export default {
                 
               let c = {id:this.id,count:this.$refs.numbox.value}
               this.$store.commit('updatecount',c)
-              console.log(c.count)
+
       }
   },
   props:['initcount','id']
