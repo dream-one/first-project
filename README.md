@@ -1,4 +1,4 @@
-## 技术栈
+# 技术栈
 * vue
 * vuex
 * vue-router
@@ -9,5 +9,5 @@
 * es6
 * babel
 
-## 结构
+# 结构
 ![img](https://github.com/dream-one/first-project/blob/master/src/lib/images/gitimg/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190811210056.png?raw=true)
