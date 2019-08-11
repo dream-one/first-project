@@ -89,10 +89,16 @@ export default {
   background-color: #ccc;
   overflow: hidden;
   width: 100%;
+  height: 100%;
   .mui-card-content-inner {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    float: right;
     .inof {
+       display: flex;
+      flex-direction: column;
+      
       h2 {
         font-size: 13px;
         text-align: center;
@@ -101,15 +107,13 @@ export default {
       p {
         display: flex;
         justify-content: space-between;
-        margin: 3px 3px;
-        padding-right: -1px;
+        flex-wrap:nowrap;
         span {
           color: red;
           font-weight: bold;
-          margin: 1px 3px;
         }
         .btn {
-          margin: 0 18px;
+          // margin: 0 1px;
         }
       }
     }
